@@ -1,0 +1,52 @@
+.header {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+
+    &-date {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__button {
+    display: flex;
+    position: relative;
+    height: 30px;
+    width: 30px;
+    background-color: #04b8a6;
+    text-decoration: none;
+    color: #fff;
+    font-size: 19px;
+    line-height: 60px;
+    text-transform: uppercase;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+  }
+
+  &__leftbtn {
+    margin-right: 3px;
+    height: 23px;
+  }
+
+  &__date {
+    margin-right: 3px;
+  }
+
+  &__rightbtn {
+    margin-right: 3px;
+    height: 23px;
+  }
+
+  &__datepicker {
+    display: none;
+  }
+
+  &__calendar-button {
+    height: 23px;
+  }
+}

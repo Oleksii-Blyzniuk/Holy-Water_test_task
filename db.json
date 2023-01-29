@@ -1,0 +1,8 @@
+{
+  "events": [
+    {"id": 1, "title": "title 1", "description": "Smth about title", "date": "1674982829"},
+    {"id": 2, "title": "title 2", "description": "Smth about title2", "date": "1674983000"},
+    {"id": 3, "title": "title 3 djdjjdjdjdjjdjd hhgh ghg hhhhhhh", "description": "Smth about title2", "date": "1674716429"},
+    {"id": 4, "title": "title 4 in Aug", "description": "Smth about title2", "date": "1661493629"}
+  ]
+}

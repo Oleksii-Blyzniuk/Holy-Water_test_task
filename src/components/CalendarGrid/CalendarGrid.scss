@@ -1,0 +1,53 @@
+.calendar {
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-gap: 1px;
+    background-color: #c9c3c3;
+    border: 1px solid #c9c3c3;
+  }
+
+  &__cell {
+    min-width: 140px;
+    min-height: 80px;
+    padding: 0 5px 0;
+    background-color: #faf7f7;
+
+    &-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &-light {
+      background-color: #bfeda6;
+      min-width: 140px;
+      min-height: 80px;
+      padding: 0 5px 0;
+    }
+  }
+
+  &__event {
+    margin: unset;
+    list-style-position: inside;
+    padding-left: 2px;
+
+    &-button {
+      position: relative;
+      // left: 10px;
+      // top: -23px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 114px;
+      border: unset;
+      background: unset;
+      color: #000;
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      text-align: left;
+    }
+  }
+}
