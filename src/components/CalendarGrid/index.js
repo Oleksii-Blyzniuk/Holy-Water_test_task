@@ -2,7 +2,7 @@ import moment from "moment";
 import React from "react";
 import './CalendarGrid.scss';
 
-export const CalendarGrid = ({ startDay, totalDays, events }) => {
+export const CalendarGrid = ({ startDay, totalDays, events, openFormHandler }) => {
   const day = startDay.clone().subtract(1, 'week');
   const daysArray = [...Array(totalDays)].map(() => day.add(1, 'day').clone());
   const isCurrentDay = (day) => moment().isSame(day, 'day');
@@ -28,7 +28,10 @@ export const CalendarGrid = ({ startDay, totalDays, events }) => {
                 .filter(event => event.date >= dayItem.format('X') && event.date <= dayItem.clone().endOf('day').format('X'))
                 .map(event => (
                   <li key={event.id}>
-                    <button className="calendar__event-button">
+                    <button
+                      className="calendar__event-button"
+                      onDoubleClick={() => openFormHandler('Update', event)}
+                    >
                       {event.title}
                     </button>
                   </li>
@@ -54,7 +57,10 @@ export const CalendarGrid = ({ startDay, totalDays, events }) => {
                 .filter(event => event.date >= dayItem.format('X') && event.date <= dayItem.clone().endOf('day').format('X'))
                 .map(event => (
                   <li key={event.id}>
-                    <button className="calendar__event-button">
+                    <button
+                      className="calendar__event-button"
+                      onDoubleClick={() => openFormHandler('Update', event)}
+                    >
                       {event.title}
                     </button>
                   </li>

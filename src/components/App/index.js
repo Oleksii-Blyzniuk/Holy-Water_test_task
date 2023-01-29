@@ -3,9 +3,15 @@ import moment from 'moment';
 import { Header } from '../Header';
 import { CalendarGrid } from '../CalendarGrid';
 import "react-datepicker/dist/react-datepicker.css";
+import './App.scss';
 
 const url = 'http://localhost:5000';
 const totalDays = 42;
+const defaultEvent = {
+  title: '',
+  description: '',
+  date: moment().format('X')
+}
 
 function App() {
   // const today = moment();
@@ -26,6 +32,11 @@ function App() {
   
   // const datapickButton = () => console.log('you clicked datapick button');
 
+  const [isShowForm, setShowForm] = useState(false);
+  const [method, setMethod] = useState(null)
+  const [event, setEvent] = useState(null);
+
+
   const [events, setEvents] = useState([]);
   const startDateQuery = startDay.clone().format('X');
   const endDateQuery = startDay.clone().add(totalDays, 'days').format('X');
@@ -37,19 +48,77 @@ function App() {
         console.log('Response', res);
         setEvents(res);
       });
-  }, [today])
+  }, [today]);
+
+  const openFormHandler = (methodName, eventForUpdate) => {
+    console.log('Click', methodName);
+    setShowForm(!isShowForm);
+    setEvent(eventForUpdate || defaultEvent);
+    setMethod(methodName);
+  }
+
+  const cancelButtonHandler = () => {
+    setShowForm(!isShowForm);
+    setEvent(null);
+  }
+
+  const changeEventHandler = (text, field) => {
+    setEvent(prevState => ({
+      ...prevState,
+      [field]: text
+    }))
+  }
 
   return (
-    <div>
+    <>
+      {
+        isShowForm ? (
+          <div
+            className='app__position'
+            onClick={cancelButtonHandler}
+          >
+            <div
+              className='app__form'
+              onClick={(e) => e.stopPropagation()}
+            >
+              <input
+                className='app__input'
+                type='text'
+                value={event.title}
+                onChange={(e) => changeEventHandler(e.target.value, 'title')}
+              >
+              </input>
+              <input
+                className='app__input'
+                type='text'
+                value={event.description}
+                onChange={(e) => changeEventHandler(e.target.value, 'description')}
+              >
+              </input>
+              <div className='app__btncontainer'>
+                <button onClick={cancelButtonHandler}>Cancel</button>
+                <button>{method}</button>
+              </div>
+            </div>
+          </div>
+        ) : null
+      }
+      <div>
       <Header
         today={today}
         prevButton={prevButton}
-        // noteButton={noteButton}
+        openFormHandler={openFormHandler}
         nextButton={nextButton}
         // datapickButton={datapickButton}
       />
-      <CalendarGrid startDay={startDay} totalDays={totalDays} events={events} />
+      <CalendarGrid
+        startDay={startDay}
+        totalDays={totalDays}
+        events={events}
+        openFormHandler={openFormHandler}
+      />
     </div>
+    </>
   );
 }
 

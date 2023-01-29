@@ -1,0 +1,50 @@
+.app {
+  &__position {
+    position: absolute;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.35);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__form {
+    width: 320px;
+    min-width: 320px;
+    // height: 132px;
+    background-color: #1E1F21;
+    color: #DDDDDD;
+    box-shadow: unset;
+    // min-width: 850px;
+    // height: 702px;
+    border-top: 1px solid #737374;
+    border-left: 1px solid #464648;
+    border-right: 1px solid #464648;
+    border-bottom: 2px solid #464648;
+    border-radius: 4px;
+    overflow:hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input {
+    padding: 4px 14px;
+    font-style: 0.85rem;
+    width: 100%;
+    border: unset;
+    background-color: #1E1F21;
+    color: #DDD;
+    outline: unset;
+    border-bottom: 1px solid #464648;
+  }
+
+  &__btncontainer {
+    padding: 8px 14px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

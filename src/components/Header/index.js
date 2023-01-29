@@ -6,7 +6,7 @@ import DatePicker from 'react-datepicker';
 export const Header = ({
   today,
   prevButton,
-  // noteButton,
+  openFormHandler,
   nextButton,
   // datapickButton
 }) => {
@@ -26,7 +26,7 @@ export const Header = ({
   <div className="header__container">
     <button
       className="header__button"
-      // onClick={noteButton}
+      onDoubleClick={() => openFormHandler('Create')}
     >
         +
     </button>
