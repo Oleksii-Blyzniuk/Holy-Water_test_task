@@ -32,22 +32,26 @@
     margin: unset;
     list-style-position: inside;
     padding-left: 2px;
+    list-style-type: none;
+    // background-color: #c9c3c3;
 
     &-button {
       position: relative;
+      background-color: #aac49b;
       // left: 10px;
       // top: -23px;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
       width: 114px;
-      border: unset;
-      background: unset;
+      border: 1px solid #aac49b;
+      border-radius: 3px;
+      // background: unset;
       color: #000;
       cursor: pointer;
-      margin: 0;
+      margin: 0 0 2px;
       padding: 0;
-      text-align: left;
+      text-align: center;
     }
   }
 }

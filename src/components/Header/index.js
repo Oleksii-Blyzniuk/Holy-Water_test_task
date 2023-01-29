@@ -26,7 +26,7 @@ export const Header = ({
   <div className="header__container">
     <button
       className="header__button"
-      onDoubleClick={() => openFormHandler('Create')}
+      onDoubleClick={() => openFormHandler('Create', null)}
     >
         +
     </button>

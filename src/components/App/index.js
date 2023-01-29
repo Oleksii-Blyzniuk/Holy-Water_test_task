@@ -10,7 +10,7 @@ const totalDays = 42;
 const defaultEvent = {
   title: '',
   description: '',
-  date: moment().format('X')
+  date: moment().format('X') //тут потрыбно буде реалізувати дату. Щоб була взаємодія між датою яку вибрали і створення
 }
 
 function App() {
@@ -22,16 +22,10 @@ function App() {
     setToday(prev => prev.clone().subtract(1, 'month'));
   }
   
-  // const noteButton = () => {
-  //   //
-  // }
-  
   const nextButton = () => {
     setToday(prev => prev.clone().add(1, 'month'));
   }
   
-  // const datapickButton = () => console.log('you clicked datapick button');
-
   const [isShowForm, setShowForm] = useState(false);
   const [method, setMethod] = useState(null)
   const [event, setEvent] = useState(null);
@@ -69,6 +63,29 @@ function App() {
     }))
   }
 
+  const eventFetchHandler = () => {
+    const fetchUrl = method === 'Update' ? `${url}/events/${event.id}` : `${url}/events`
+    const httpMethod = method === 'Update' ? 'PATCH' : 'POST';
+
+    fetch(fetchUrl, {
+      method: httpMethod,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(event)
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        if (method === 'Update') {
+          setEvents(prevState => prevState.map(eventEl => eventEl.id === res.id ? res : eventEl))
+        } else {
+          setEvents(prevState => [...prevState, res]);
+        }
+        cancelButtonHandler();
+      })
+  }
+
   return (
     <>
       {
@@ -97,7 +114,7 @@ function App() {
               </input>
               <div className='app__btncontainer'>
                 <button onClick={cancelButtonHandler}>Cancel</button>
-                <button>{method}</button>
+                <button onClick={eventFetchHandler}>{method}</button>
               </div>
             </div>
           </div>
