@@ -7,11 +7,6 @@ import './App.scss';
 
 const url = 'http://localhost:5000';
 const totalDays = 42;
-const defaultEvent = {
-  title: '',
-  description: '',
-  date: moment().format('X') //тут потрыбно буде реалізувати дату. Щоб була взаємодія між датою яку вибрали і створення
-}
 
 function App() {
   // const today = moment();
@@ -32,14 +27,21 @@ function App() {
 
 
   const [events, setEvents] = useState([]);
+  const [date, setDate] = useState(moment().format('X'));
   const startDateQuery = startDay.clone().format('X');
   const endDateQuery = startDay.clone().add(totalDays, 'days').format('X');
+
+  const defaultEvent = {
+    title: '',
+    description: '',
+    date: date
+  }
 
   useEffect(() => {
     fetch(`${url}/events?date_gte=${startDateQuery}&date_lte=${endDateQuery}`)
       .then(res => res.json())
       .then(res => {
-        console.log('Response', res);
+        // console.log('Response', res);
         setEvents(res);
       });
   }, [today]);
@@ -63,6 +65,15 @@ function App() {
     }))
   }
 
+  const changeDateHandler = (eventDate) => {
+    // const dateTest = new Date(eventDate);
+    
+    setDate(moment(eventDate, 'YYYY.MM.DD').unix())
+    // setDate(dateTest.getTime() / 1000);
+    // console.log(date);
+    // console.log(moment().format('X'))
+  }
+
   const eventFetchHandler = () => {
     const fetchUrl = method === 'Update' ? `${url}/events/${event.id}` : `${url}/events`
     const httpMethod = method === 'Update' ? 'PATCH' : 'POST';
@@ -76,13 +87,31 @@ function App() {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        // console.log(res);
         if (method === 'Update') {
           setEvents(prevState => prevState.map(eventEl => eventEl.id === res.id ? res : eventEl))
         } else {
           setEvents(prevState => [...prevState, res]);
         }
         cancelButtonHandler();
+      })
+  }
+
+  const removeEventHandler = () => {
+    const fetchUrl = `${url}/events/${event.id}`;
+    const httpMethod = 'DELETE';
+
+    fetch(fetchUrl, {
+      method: httpMethod,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        setEvents(prevState => prevState.filter(eventEl => eventEl.id !== event.id))
+        cancelButtonHandler()
       })
   }
 
@@ -103,6 +132,7 @@ function App() {
                 type='text'
                 value={event.title}
                 onChange={(e) => changeEventHandler(e.target.value, 'title')}
+                required
               >
               </input>
               <input
@@ -112,9 +142,21 @@ function App() {
                 onChange={(e) => changeEventHandler(e.target.value, 'description')}
               >
               </input>
+              <input
+                className='app__input'
+                type='date'
+                // value={}
+                onChange={(e) => changeDateHandler(e.target.value)}
+              >
+              </input>
               <div className='app__btncontainer'>
                 <button onClick={cancelButtonHandler}>Cancel</button>
                 <button onClick={eventFetchHandler}>{method}</button>
+                {
+                  method === 'Update' ? (
+                    <button className='app__removebtn' onClick={removeEventHandler}>Remove</button>
+                  ) : null
+                }
               </div>
             </div>
           </div>
@@ -126,7 +168,6 @@ function App() {
         prevButton={prevButton}
         openFormHandler={openFormHandler}
         nextButton={nextButton}
-        // datapickButton={datapickButton}
       />
       <CalendarGrid
         startDay={startDay}

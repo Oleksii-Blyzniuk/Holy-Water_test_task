@@ -47,4 +47,10 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  &__removebtn {
+    background-color: #fa0202;
+    border-color: #fa0202;
+    color: #fff;
+  }
 }

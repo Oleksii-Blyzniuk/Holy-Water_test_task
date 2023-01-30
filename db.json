@@ -1,22 +1,10 @@
 {
   "events": [
     {
-      "id": 1,
-      "title": "title 1",
-      "description": "Smth about title",
-      "date": "1674982829"
-    },
-    {
       "id": 2,
       "title": "title 2",
       "description": "Smth about title2",
       "date": "1674983000"
-    },
-    {
-      "id": 3,
-      "title": "title 3",
-      "description": "Smth about title2",
-      "date": "1674716429"
     },
     {
       "id": 4,
@@ -25,16 +13,22 @@
       "date": "1661493629"
     },
     {
-      "title": "smth",
-      "description": "about smth",
-      "date": "1675025894",
-      "id": 5
+      "title": "klkl",
+      "description": "hjkhbhjv",
+      "date": 1671055200,
+      "id": 13
     },
     {
-      "title": "t",
-      "description": "d",
-      "date": "1675027039",
-      "id": 6
+      "title": "title",
+      "description": "smth",
+      "date": "1675037000",
+      "id": 14
+    },
+    {
+      "title": "h",
+      "description": "ghg",
+      "date": 1679522400,
+      "id": 15
     }
   ]
 }

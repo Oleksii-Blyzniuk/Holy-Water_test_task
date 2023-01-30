@@ -8,7 +8,6 @@ export const Header = ({
   prevButton,
   openFormHandler,
   nextButton,
-  // datapickButton
 }) => {
   const [initialDate, setInitialDate] = useState(new Date());
   const [dataPicker, setDataPicker] = useState(false);
